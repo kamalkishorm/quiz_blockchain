@@ -44,10 +44,10 @@ fs.readFile(__dirname + "/" + "build/contracts/Quiz.json", 'utf8', function(err,
     abiDecoder.addABI(JSON.parse(data).abi);
 
     dbConfig = {
-        user: "sa",
-        password: "mssql@123",
-        server: "40.71.86.193",
-        database: "blockchain",
+        user: "....",
+        password: "....",
+        server: "....",
+        database: "....",
         options: {
             encrypt: true
         }

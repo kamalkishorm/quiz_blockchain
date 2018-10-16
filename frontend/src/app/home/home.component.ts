@@ -26,13 +26,15 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        localStorage.setItem('address', '0');
-        localStorage.setItem('token', '0');
+        // localStorage.setItem('address', '0');
+        // localStorage.setItem('token', '0');
+        // localStorage.setItem('id', '0');
     }
     openVerticallyCentered(content) {
         this.modalService.open(content, { centered: true });
     }
     UserLogin() {
+        localStorage.setItem('id', this.id);
         const formdata = {
             'id': this.id,
             'password': this.password
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
     }
 
     AdminLogin() {
+        localStorage.setItem('id', this.id);
         const formdata = {
             'id': this.id,
             'password': this.password

@@ -86,12 +86,11 @@ export class UserComponent implements OnInit {
             const name = 'answer' + this.answer[k].id ;
             const data = document.getElementsByName(name);
             for (let i = 0 ; i < 4; i++) {
-                if (data[i].checked && this.answer[k].answer === (i + 1)) {
+                if ((<HTMLInputElement>data[i]).checked && this.answer[k].answer === (i + 1)) {
                     score += 1;
                 }
             }
         }
-        console.log(score);
         const formdata = {
             'id': localStorage.getItem('id'),
             'score': score
@@ -102,6 +101,8 @@ export class UserComponent implements OnInit {
                 console.log(data);
                 if (data['tx']) {
                     window.location.reload();
+        alert(score);
+
                 } else {
                     console.error(data);
                 }
@@ -110,6 +111,5 @@ export class UserComponent implements OnInit {
                 console.log(error);
                 const errorResponse = error.json();
             });
-        )
     }
 }
