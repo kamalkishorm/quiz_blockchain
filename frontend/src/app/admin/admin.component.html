@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+<main role="main" class="admin">
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+                <p><button class="btn btn-light" (click)="changeView('user')">User List</button></p>
+                <p><button class="btn btn-light" (click)="changeView('qanda')">Q&A</button></p>
+            </div>
+            <div class="col-sm-8 text-left">
+                <h1>Dashboard</h1>
+                <div>
+                    <div ng-show="showUser">
+                        <table style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Result</th>
+                                    <th>Refresh Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let user of userlist">
+                                    <td>{{ user.id }}</td>
+                                    <td>{{ user.uname }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td attr.id="{{user.id}}"></td>
+                                    <td>
+                                        <button class="btn btn-light" (click)="getUserResult(user)">Get Result</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><button class="btn btn-light" (click)="getMoreUser()">More</button></p>
+
+                    </div>
+                    <div ng-show="showqanda">
+                        <table style="width: 50%;">
+                            <thead>
+                                <tr>
+                                    <th>Question ID</th>
+                                    <th>Question</th>
+                                    <th>Choice 1</th>
+                                    <th>Choice 2</th>
+                                    <th>Choice 3</th>
+                                    <th>Choice 4</th>
+                                    <th>Answer</th>
+                                    <th>Active</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let question of qandalist">
+                                    <td>{{ question.id }}</td>
+                                    <td>{{ question.question }}</td>
+                                    <td>{{ question.choice1 }}</td>
+                                    <td>{{ question.choice2 }}</td>
+                                    <td>{{ question.choice3 }}</td>
+                                    <td>{{ question.choice4 }}</td>
+                                    <td>{{ question.answer }}</td>
+                                    <td>{{ question.is_active }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><button class="btn btn-light" (click)="getMoreQandA()">More</button></p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</main>

@@ -1,0 +1,17 @@
+{
+    "requires": true,
+    "lockfileVersion": 1,
+    "dependencies": {
+        "abi-decoder": "^1.2.0",
+        "body-parser": "^1.18.3",
+        "crypto": "^1.0.1",
+        "express": "^4.16.4",
+        "fs": "0.0.1-security",
+        "jsonwebtoken": "^8.3.0",
+        "mssql": "^4.2.1",
+        "request": "^2.88.0",
+        "truffle-contract": "^3.0.6",
+        "truffle-hdwallet-provider": "0.0.6",
+        "web3": "^0.20.1"
+    }
+}
