@@ -15,28 +15,31 @@ import { AdminComponent } from './admin/admin.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import {EthcontractService} from './ethcontract.service';
+import { AppMaterialModule } from './app.material.module';
+
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		UserComponent,
-		AdminComponent,
-		HomeComponent,
-		NavbarComponent
-	],
-	imports: [
-		BrowserModule,
-		BrowserAnimationsModule,
-		ChartsModule,
-		FormsModule,
-		HttpModule,
-		NgbModule.forRoot(),
-		SimpleNotificationsModule.forRoot(),
-		// Ng4LoadingSpinnerModule.forRoot(),
-		AppRoutingModule,
-		NgxSpinnerModule.forRoot()
-	],
-	providers: [EthcontractService],
-	bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        UserComponent,
+        AdminComponent,
+        HomeComponent,
+        NavbarComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ChartsModule,
+        FormsModule,
+        HttpModule,
+        NgbModule.forRoot(),
+        SimpleNotificationsModule.forRoot(),
+        // Ng4LoadingSpinnerModule.forRoot(),
+        AppRoutingModule,
+        NgxSpinnerModule,
+        AppMaterialModule
+    ],
+    providers: [EthcontractService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

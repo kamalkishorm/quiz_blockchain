@@ -25,7 +25,7 @@
 
 <ng-template #UserLogin1 let-c="close" let-d="dismiss">
     <div class="modal-header bg-primary" style="color: #fff;">
-        <h5 class="modal-title">Login to user</h5>
+        <h5 class="modal-title">Login to User</h5>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -41,14 +41,16 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="password">Password</label>
-                    <input type="text" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="Password">
                 </div>
             </div>
         </form>
     </div>
-    <div>
-        <span class="nav-link" style="cursor: pointer;" (click)="openVerticallyCentered(UserRegister1)"><b>New User Registration</b></span>
+    <div style="text-align: center">
+        <button class="btn btn-light" style="cursor: pointer;" (click)="openVerticallyCentered(AdminLogin1)">New User Registration</button>
     </div>
+    <br>
+
     <div class="modal-footer">
         <button type="button" class="btn btn-warning col-md-6 " (click)="c('Close click')">Close</button>
         <button type="button" class="btn btn-primary col-md-6 " (click)="UserLogin();d('Cross click');">Submit</button>
@@ -73,7 +75,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="password">Password</label>
-                    <input type="text" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="Password">
                 </div>
             </div>
         </form>

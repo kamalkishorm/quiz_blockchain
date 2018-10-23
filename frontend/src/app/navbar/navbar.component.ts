@@ -58,16 +58,15 @@ export class NavbarComponent implements OnInit {
                 'id': localStorage.getItem('id')
             };
             this.ethcontractservice.getuserinfo(formdata).then(
-                data=>{
+                data => {
                     console.log(data[0]);
                     this.userinforesult = data[0][0];
                 this.ethcontractservice.getresult(formdata).then(
-                    data => {
-                        console.log(data);
-                    if (data[1]) {
-                        this.userinforesult.score = data[0];
-                    console.log(this.userinforesult)
-
+                    scoredata => {
+                        console.log(scoredata);
+                    if (scoredata[1]) {
+                        this.userinforesult.score = scoredata[0];
+                        console.log(this.userinforesult);
                     } else {
                         this.userinforesult.score = 'Test not given yet!!!';
                     }
@@ -80,9 +79,7 @@ export class NavbarComponent implements OnInit {
                     const errorResponse = error.json();
 
                 }
-                
             );
-            
         } else {
             this.adminshow = false;
             this.usershow = false;
@@ -125,7 +122,10 @@ export class NavbarComponent implements OnInit {
         };
         this.ethcontractservice.adminlogin(formdata).then(
             data => {
-                if (data['result'] === true) {
+                console.log(data);
+                if (data['token']) {
+                    localStorage.setItem('token', data['token']);
+                    localStorage.setItem('id', formdata.id);
                     this.routerurl = '/admin';
                     this.router.navigate([this.routerurl]);
                 }
@@ -134,7 +134,7 @@ export class NavbarComponent implements OnInit {
                 console.log(error);
             });
     }
-    RegisterUser(){
+    RegisterUser() {
         const formdata = {
             'uname': this.uname,
             'email': this.email,
@@ -143,7 +143,7 @@ export class NavbarComponent implements OnInit {
         this.ethcontractservice.registeruser(formdata).then(
             data => {
                 if (data['error'] === 0) {
-                    alert("User ID :"+ data["id"]);
+                    alert('User ID :' + data['id']);
                     this.routerurl = '/home';
                     this.router.navigate([this.routerurl]);
                     window.location.reload();

@@ -44,10 +44,10 @@ fs.readFile(__dirname + "/" + "build/contracts/Quiz.json", 'utf8', function(err,
     abiDecoder.addABI(JSON.parse(data).abi);
 
     dbConfig = {
-        user: "....",
-        password: "....",
-        server: "....",
-        database: "....",
+        user: "sa",
+        password: "mssql@123",
+        server: "40.71.86.193",
+        database: "blockchain",
         options: {
             encrypt: true
         }
@@ -76,7 +76,7 @@ app.post('/usersList', function(req, res) {
                     console.log("Error while querying database :- " + err);
                     res.status(400).json(err).end();
                 } else {
-                    console.log(result)
+                    console.log(result);
                     res.status(200).json(result.recordset).end();
                 }
             });
@@ -92,14 +92,14 @@ app.post('/adminlogin', function(req, res) {
         var result = {
             "username": "admin",
             "password": "admin"
-        }
+        };
         let token = jwt.sign(result, process.env.SECRET_KEY, {
             expiresIn: 1440
         });
         var data = {
             "username": "admin",
             "token": token
-        }
+        };
         res.status(200).json(data).end();
     }
 });
@@ -236,7 +236,7 @@ app.get('/taketest', function(req, res) {
                     console.log("Error while querying database :- " + err);
                     res.status(400).json(err).end();
                 } else {
-                    console.log(result)
+                    console.log(result);
                     res.status(200).json(result.recordset).end();
                 }
             });
@@ -247,7 +247,7 @@ app.get('/taketest', function(req, res) {
 app.post('/qanda', function(req, res) {
     var qandapointer_low = req.body.qandapointer;
     var qandapointer_high = qandapointer_low + 10;
-    var query = "select * from (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS Row_, * FROM [dbo].[qanda]) as X where ROW_ between " + qandapointer_low + " and " + qandapointer_high;
+    var query = "select id,question,choice1,choice2,choice3,choice4,answer,is_active from (SELECT ROW_NUMBER() OVER(ORDER BY id ASC) AS Row_, * FROM [dbo].[qanda]) as X where ROW_ between " + qandapointer_low + " and " + qandapointer_high;
     console.log(query);
     mssql.close()
     mssql.connect(dbConfig, function(err) {
@@ -261,7 +261,7 @@ app.post('/qanda', function(req, res) {
                     console.log("Error while querying database :- " + err);
                     res.status(400).json(err).end();
                 } else {
-                    console.log(result)
+                    console.log(result);
                     res.status(200).json(result.recordset).end();
                 }
             });

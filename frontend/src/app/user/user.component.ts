@@ -3,6 +3,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router, RouterModule } from '@angular/router';
 import { EthcontractService } from '../ethcontract.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { MatButtonModule, MatTableModule} from '@angular/material';
+
 import { QA } from './qalist';
 
 @Component({
@@ -16,18 +18,19 @@ export class UserComponent implements OnInit {
     qandalist: any;
     answer: QA[];
     transaction: any;
+    userinforesult: any;
+    public showInfo: boolean = false;
+    public showTest: boolean = false;
+    displayedColumns: string[] = ['question', 'choice1', 'choice2', 'choice3', 'choice4'];
+
     constructor(
         private modalService: NgbModal,
         private router: Router,
         private ethcontractservice: EthcontractService,
     ) {
-        // router.events.subscribe((val) => {
-        //     // see also 
-        //     console.log(val)
-        // });
     }
-
     ngOnInit() {
+
     }
     jsonstringify(data) {
         // console.log(data)
@@ -35,16 +38,44 @@ export class UserComponent implements OnInit {
     }
     changeView(viewData) {
         if (viewData === 'result') {
-            this.getUserResult(localStorage.getItem('id'));
-       // $scope.showUser = true;
-       // $scope.showQandA = false;
+            // this.getUserResult(localStorage.getItem('id'));
+            this.showInfo = true;
+            this.showTest = false;
+            console.log(localStorage.getItem('id'));
+            const formdata = {
+                'id': localStorage.getItem('id')
+            };
+            this.ethcontractservice.getuserinfo(formdata).then(
+                data => {
+                    console.log(data[0]);
+                    this.userinforesult = data[0][0];
+                this.ethcontractservice.getresult(formdata).then(
+                    scoredata => {
+                        console.log(scoredata);
+                    if (scoredata[1]) {
+                        this.userinforesult.score = scoredata[0];
+                        console.log(this.userinforesult);
+                    } else {
+                        this.userinforesult.score = 'Test not given yet!!!';
+                    }
+                    },
+                    error => {
+                        const errorResponse = error.json();
+                    });
+                },
+                error => {
+                    const errorResponse = error.json();
+
+                }
+            );
           } else if (viewData === 'taketest') {
               this.takeTest();
-         //   $scope.showUser = false;
-         //   $scope.showQandA = true;
+              this.showInfo = false;
+              this.showTest = true;
         }
     }
     getUserResult(id) {
+        console.log(id);
         const formdata = {
             'id': id
         };
@@ -65,6 +96,7 @@ export class UserComponent implements OnInit {
         this.ethcontractservice.taketest().then(
             data => {
                 this.qandalist = data;
+                console.log(data);
                 const arrayData = [];
                 for (const k of Object.keys( data)) {
                     arrayData.push({

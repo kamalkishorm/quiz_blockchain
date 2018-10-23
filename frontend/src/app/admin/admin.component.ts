@@ -18,6 +18,8 @@ export class AdminComponent implements OnInit {
     userlist: any;
     qandalist: any;
     $scope: any;
+    public showUser:boolean = false;
+    public showQandA:boolean = false;
     constructor(
         private modalService: NgbModal,
         private router: Router,
@@ -30,6 +32,9 @@ export class AdminComponent implements OnInit {
         //     console.log(val)
         // });
     }
+    userDisplayedColumns: string[] = ['id', 'uname', 'email', 'result', 'getdetails' ];
+    questionDisplayedColumns: string[] = ['id', 'question', 'choice1', 'choice2', 'choice3', 'choice4', 'answer', 'is_active'];
+
 
     ngOnInit() {
     }
@@ -49,12 +54,12 @@ export class AdminComponent implements OnInit {
     changeView(viewData) {
         if (viewData === 'user') {
             this.getUserList();
-       // $scope.showUser = true;
-       // $scope.showQandA = false;
+            this.showUser = true;
+            this.showQandA = false;
           } else if (viewData === 'qanda') {
               this.getQandA();
-         //   $scope.showUser = false;
-         //   $scope.showQandA = true;
+              this.showUser = false;
+              this.showQandA = true;
         }
     }
     getUserList() {

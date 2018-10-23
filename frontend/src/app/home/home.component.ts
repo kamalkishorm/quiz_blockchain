@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
                 console.log(error);
             });
     }
-    RegisterUser(){
+    RegisterUser() {
         const formdata = {
             'uname': this.uname,
             'email': this.email,
@@ -81,7 +81,7 @@ export class HomeComponent implements OnInit {
         this.ethcontractservice.registeruser(formdata).then(
             data => {
                 if (data['error'] === 0) {
-                    alert("User ID :"+ data["id"]);
+                    alert('User ID :' + data['id']);
                     this.routerurl = '/home';
                     this.router.navigate([this.routerurl]);
                     window.location.reload();
