@@ -29,9 +29,10 @@ var infura_apikey = "v3/8cf80ccb22dd4231b0b609cad3f58383";
 var mnemonic = "letter casino spread lawn water toward extend public gasp turn wave bone";
 var localRPC = "HTTP://127.0.0.1:8545"
 let web3 = new Web3();
-var web3Provider = new HDWalletProvider(mnemonic, localRPC)
-console.log(web3Provider);
-web3.setProvider(new Web3.providers.HttpProvider(localRPC));
+// var web3Provider = new HDWalletProvider(mnemonic, localRPC)
+// web3.setProvider(new Web3.providers.HttpProvider(localRPC));
+var web3Provider = new HDWalletProvider(mnemonic, "https://ropsten.infura.io/" + infura_apikey)
+web3.setProvider(new Web3.providers.HttpProvider("https://ropsten.infura.io/" + infura_apikey));
 
 web3.eth.defaultAccount = "0xdd56707585Bd9392500bBb30eEf767fb33299FF8";
 var dbConfig, quizContract;
@@ -273,6 +274,7 @@ app.post('/qanda', function(req, res) {
 app.get('/getAccountBalance', function(req, res) {
     // console.log(req.body.address)
     var x = web3.fromWei(web3.eth.getBalance(web3.eth.defaultAccount));
+    console.log(web3.eth.getBalance(web3.eth.defaultAccount));
     // xa = web3.fromWei(x, 'ether');
     // console.log(xa)
     var data = {
